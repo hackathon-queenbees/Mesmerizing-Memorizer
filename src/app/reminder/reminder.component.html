@@ -30,12 +30,19 @@
         <div class="form-group mt-5" [hidden]="!(action=='upload')">
             <button mat-button [type]="selectFilesButtonType" color="primary" class="file-input-button-link"
                 (click)="uploadFile.click()">
-                <span>Choose File</span>
+                <span>{{choosefileText}}</span>
                 <input #uploadFile type="file" style="display: none" onclick="this.value = null" class="text-nowrap text-truncate"
                     (change)="selectFileFromUI($event)" />
             </button>
-            
             <span class="file-input-text" [hidden]="fromRecordingToSaveInFirebase">{{ fileName }}</span>
+            <button mat-button [type]="selectFilesButtonType" color="primary" class="file-input-button-link"
+                (click)="uploadImageFile.click()" [hidden]="!showCustomUpload">
+                <span>Choose Image</span>
+                <input #uploadImageFile type="file" style="display: none" onclick="this.value = null" class="text-nowrap text-truncate"
+                    (change)="selectImageFileForCustom($event)" />
+            </button>
+            
+            <span class="file-input-text">{{ fileNameForImage }}</span>
         </div>
         <div class="form-group mt-3" [hidden]="fileTypeChosen!='Record Audio'">
             <button (click)="initiateRecording()" class="btn btn-primary" *ngIf="!recording"
@@ -45,6 +52,15 @@
             <audio controls="" #audio *ngIf="url">
                 <source [src]="sanitize(url)" type="audio/wav">
             </audio>
+        </div>
+        <div [hidden]="fileTypeChosen!='Record Audio'">
+            <button mat-button [type]="selectFilesButtonType" color="primary" class="file-input-button-link"
+            (click)="uploadImageFile.click()" [hidden]="!showCustomUpload">
+            <span>Choose Image</span>
+            <input #uploadImageFile type="file" style="display: none" onclick="this.value = null" class="text-nowrap text-truncate"
+                (change)="selectImageFileForCustom($event)" />
+        </button>
+        <span class="file-input-text">{{ fileNameForImage }}</span>
         </div>
         <div class="form-group mt-3" [hidden]="fileTypeChosen == 'Upload Video' || 
         fileTypeChosen == 'Upload Audio' || fileTypeChosen == 'Record Audio' || fileTypeChosen == ''">

@@ -33,11 +33,13 @@ export class ReminderComponent implements OnInit {
  url;
  error;
  selectedFiles?: File;
+ selectedImageFiles?: File;
  currentFileUpload?: FileUpload;
  fromRecordingToSaveInFirebase = false;
  fileName;
  percentage = 0;
  @ViewChild('uploadFile', {}) uploadFile: ElementRef;
+ @ViewChild('uploadImageFile', {}) uploadImageFile: ElementRef;
  selectFilesButtonType: 'button' | 'menu' | 'reset' | 'submit' = 'button';
  percentageDisplay;
  disableUploadButton: boolean;
@@ -69,7 +71,8 @@ export class ReminderComponent implements OnInit {
  model = {
    categoryChosen: new FormControl(''),
    fileTypeChosen: new FormControl(''),
-   timeChosen: new FormControl('')
+   timeChosen: new FormControl(''),
+   customCategory : new FormControl('')
  };
 
  @ViewChild('videoElement') videoElement: ElementRef;
@@ -84,6 +87,9 @@ export class ReminderComponent implements OnInit {
  videoStream: MediaStream;
  videoConf = { video: { facingMode: "user", width: 320 }, audio: true }
   currentUserData: any;
+  choosefileText;
+  showCustomUpload: boolean;
+  fileNameForImage: any;
 
  constructor(private domSanitizer: DomSanitizer, private uploadService: MusicService,
    private fStorage: AngularFireStorage, private userDataService: UserdataService,
@@ -246,6 +252,13 @@ export class ReminderComponent implements OnInit {
    this.disableUploadButton = false;
  }
 
+ selectImageFileForCustom(event: any): void{
+  this.selectedImageFiles = event.target.files;
+   this.fileNameForImage = this.selectedImageFiles[0].name;
+   this.enableAddReminder = true;
+   this.disableUploadButton = false;
+ }
+
  upload(){
    if(this.fileTypeChosen == "Record Audio" || this.fileTypeChosen == "Upload Audio" || this.fileTypeChosen == "Upload Video"){
      this.uploadFileToFirebase();
@@ -269,9 +282,22 @@ export class ReminderComponent implements OnInit {
 
      let userDataObtained = {
        category: this.categoryChosen,
+       customCategory : "no",
        fileType: this.fileTypeChosen,
        schedule: this.userForm.value.timeChosen,
-       notificationSent: "no"
+       notificationSent: "no",
+       imgFile : null
+     }
+
+     if(this.categoryChosen == 'Custom'){
+      userDataObtained = {
+        category: this.userForm.value.customCategory,
+        customCategory : "yes",
+        fileType: this.fileTypeChosen,
+        schedule: this.userForm.value.timeChosen,
+        notificationSent: "no",
+        imgFile : this.selectedImageFiles[0]
+      }
      }
 
      if (file) {
@@ -289,6 +315,8 @@ export class ReminderComponent implements OnInit {
              this.fileTypeChosen = "";
              this.action = "";
              this.url = undefined;
+             this.fileNameForImage = ''
+             this.fileName = ''
              this.userForm.reset();
            }
          },
@@ -298,6 +326,8 @@ export class ReminderComponent implements OnInit {
            file = undefined;
            this.percentageDisplay = ""
            this.disableUploadButton = true;
+           this.fileNameForImage = ''
+             this.fileName = ''
          }
        );
      }
@@ -306,17 +336,34 @@ export class ReminderComponent implements OnInit {
 
  onCategoryChange(event) {
    this.categoryChosen = this.userForm.value.categoryChosen;
+   this.showCustomUpload = false;
+   if(this.categoryChosen == "Custom"){
+    this.showCustomUpload = true;
+   }
  }
 
  onFileTypeChange(event) {
+   this.showCustomUpload = false;
    this.fileTypeChosen = this.userForm.value.fileTypeChosen;
    if (this.fileTypeChosen == "Record Audio") {
+    this.isVideoRecording = false;
+    this.videoBlobUrl =  undefined;
      this.action = 'record';
+     if(this.categoryChosen == 'Custom')
+     this.showCustomUpload = true;
    }
    else if (this.fileTypeChosen == "Upload Audio") {
+    this.isVideoRecording = false;
+    this.videoBlobUrl =  undefined;
      this.action = "upload";
+     this.choosefileText = "Choose Audio File";
+     if(this.categoryChosen == 'Custom')
+     this.showCustomUpload = true;
    }
    else if (this.fileTypeChosen == 'Upload Video') {
+    this.isVideoRecording = false;
+    this.videoBlobUrl =  undefined;
+    this.choosefileText = "Choose Video File";
      this.action = "upload";
    }
    else if (this.fileTypeChosen == 'Record Video') {
@@ -399,6 +446,8 @@ export class ReminderComponent implements OnInit {
          this.fileTypeChosen = "";
          this.action = "";
          this.userForm.reset();
+         this.fileNameForImage = ''
+             this.fileName = ''
        },
        error => {
          console.log(error);
