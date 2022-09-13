@@ -1,0 +1,39 @@
+.file-input-button { 
+    margin-right: 8px !important;
+    background-color: rgb(5,104,174) !important;
+    font-family: ATTAleckSans;
+    color:#ffffff !important;
+    width: 100px;
+    font-size: 15px;
+    font-weight: 500;
+  }
+  
+  .file-input-button-link { 
+    margin-right: 5px !important;
+    font-family: ATTAleckSans;
+    font-size: 15px;
+    font-weight: 500;
+  }
+  
+  
+  .file-input-text { font-size: 14px !important; margin-right: 2px !important ;
+    margin-left: 20px;
+    margin-top:13px !important
+  }
+  
+  div.one {
+    display:table;
+    margin:0 auto;
+  }
+
+  table {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    min-width: 500px;
+}
+
+th.mat-header-cell {
+    text-align: left;
+    max-width: 300px;
+}
