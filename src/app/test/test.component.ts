@@ -307,9 +307,10 @@ export class TestComponent implements OnInit {
         notificationSent: "no"
       }
 
+      let currentUserData;
       if (file) {
         this.currentFileUpload = new FileUpload(file);
-        this.uploadService.pushFileToStorage(this.currentFileUpload, this.fileName, userDataObtained).subscribe(
+        this.uploadService.pushFileToStorage(this.currentFileUpload, this.fileName, userDataObtained,currentUserData).subscribe(
           percentage => {
             this.percentage = Math.round(percentage ? percentage : 0);
             this.percentageDisplay = this.percentage + "%";
@@ -411,9 +412,10 @@ export class TestComponent implements OnInit {
         schedule: this.userForm.value.timeChosen,
         notificationSent: "no"
       }
+      let currentUserData;
     if (file) {
       this.currentFileUpload = new FileUpload(file);
-      this.uploadService.pushFileToStorage(this.currentFileUpload,this.fileName,userDataObtained).subscribe(
+      this.uploadService.pushFileToStorage(this.currentFileUpload,this.fileName,userDataObtained,currentUserData).subscribe(
         percentage => {
           this.percentage = Math.round(percentage ? percentage : 0);
         },
