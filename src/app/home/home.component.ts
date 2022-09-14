@@ -25,15 +25,17 @@ export class HomeComponent implements OnInit {
   @ViewChild('audio') audio: ElementRef;
   @ViewChild('audioPlay') audioPlay: ElementRef;
   @ViewChild('videoEl') videoEl: ElementRef;
+  upcomingList=[]
   constructor(private domSanitizer: DomSanitizer, private db: AngularFirestore,
     private ref: ChangeDetectorRef, private uploadService: MusicService) { }
 
   ngOnInit(): void {
+    this.getAllUserData();
   }
 
   ngAfterViewInit(): void {
     this.videoObj = this.videoEl.nativeElement;
-    this.getAllUserData();
+    
   }
 
   getAllUserData() {
@@ -81,13 +83,14 @@ export class HomeComponent implements OnInit {
               let hrs = time.split(":");
               return parseInt(hrs[0])  < d.getHours() + 3
              } });
-            console.log("upcoming",upcoming);
+             _this.upcomingList.push(upcoming[0]);
+            console.log("upcoming",this.upcomingList);
 
             _this.playAudioOrVideo(a[i]);
             //_this.updateNotification(id); // updating notification sent in firebase database
           }
         }
-        timerId = setTimeout(tick, 2000); // calling settimeout repeatedly to check if reminders need to be sent
+        //timerId = setTimeout(tick, 2000); // calling settimeout repeatedly to check if reminders need to be sent
       }, 2000);
 
     })

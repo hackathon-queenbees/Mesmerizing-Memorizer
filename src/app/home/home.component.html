@@ -1,58 +1,51 @@
 <!-- <div style="margin-top: 160px;"></div> -->
 <section class="home">
-
-<div class="container">
-    <div class="row">
-        <div class="col">
-         
-        </div>
-        <div class="col">
-            <h1>DESCRIPTION</h1>
-        </div>
-
-    </div>
-</div>
-
-<div class="container">
-    <div class="row">
-        <div class="col">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="text-center" [hidden]="!isAudio">
-                        <h3>
-                            <!-- <video #videoEl controls autoplay muted>
-                            <source src="{{urlObtained}}">
-                        </video> -->
-                            <!-- <img style="width:110px;height:110px" src="{{imageUrl}}" /> -->
-                            <img style="width:110px;height:110px" src="{{imageUrl}}"/>
-                            <audio controls #audioPlay id='player'>
+    
+    <div class="tp_container">
+        <div class="container">
+            <div class="row d-flex align-items-center">
+                <div class="col-md-6 col-sm-6">
+                    <h1>Heading</h1>
+                    <p>testing testing</p>
+                </div>
+                <div class="col-md-6 col-sm-6">
+                    <div class="media_container">
+                        <!-- Empty Image -->
+                        <!-- <img class="img-fluid"/> -->
+                        <!-- Empty Image -->
+                        <div style="width: 100%;" [hidden]="!isAudio"> 
+                            <img class="audio_preview img-fluid" src="{{imageUrl}}"/>
+                            <audio controls #audioPlay id='player' style="width: 100%;">
                                 <source type="audio/mpeg">
                             </audio>
-                        </h3>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="text-center" [hidden]="!isAudio">
-                        <h3>
-                            <!-- <video #videoEl controls autoplay muted>
-                                <source src="{{urlObtained}}">
-                            </video> -->
-                            <video #videoEl width="320" height="240" controls>
-
+                        </div>
+                        <!-- Video content -->
+                        <div style="width: 100%;"[hidden]="isAudio">
+                            <video #videoEl width="100%" height="480" controls>
                             <source type='video/mp4' src="{{urlObtained}}">
-
                             </video>
-                        </h3>
+                        </div>
+                        <!-- Video content -->
                     </div>
                 </div>
             </div>
-
         </div>
-
     </div>
-</div>
+
+    <div class="bt_container">
+        <div class="container">
+            <h4 class="darkBlue">Upcoming ..</h4>
+            <div class="row">
+                <div class="col-md-3" *ngFor="let item of upcomingList">
+                    <div class="card" style="width: 100%;">
+                        <div class="card-header cateTitle">{{item.category}}</div>
+                        <div class="card-body">
+                            
+                            <p class="card-text">{{item.schedule}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>

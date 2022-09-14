@@ -1,0 +1,32 @@
+.tp_container{
+    width: 100%;
+    background: rgb(27,86,164);
+background: linear-gradient(180deg, rgba(27,86,164,1) 0%, rgba(156,4,250,1) 100%);
+    height: auto;
+    padding: 50px 0;
+}
+.tp_container h1,
+.tp_container p{
+    color: #fff;
+}
+.media_container{
+    width: 640px;
+    max-height: 480px;
+    
+    // background-color: #ddd;
+}
+.audio_preview{
+    width:640px;
+    height:340px
+}
+
+.bt_container{
+    width: 100%;
+    padding: 50px 0;
+}
+.bt_container .cateTitle{
+    background: #009FDB;
+    color: #fff;
+    font-size: 20px;
+    margin: 0;
+}
