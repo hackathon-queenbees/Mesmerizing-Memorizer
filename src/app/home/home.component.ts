@@ -67,15 +67,23 @@ export class HomeComponent implements OnInit {
           var eta_ms = new Date(d.getFullYear(), d.getMonth(), d.getDate(), this.hrsAndMin[0], this.hrsAndMin[1]).getTime() - Date.now();
           if (eta_ms <= 0 && a[i].notificationSent == "no") {
             let id = a[i].id;
-            console.log("available reminders::" + JSON.stringify(a[i]));
+            //console.log("available reminders::" + JSON.stringify(a[i]));
             _this.urlObtained = a[i].downloadURL;
             if (a[i].fileType == "Record Audio" || a[i].fileType == "Upload Audio") {
               _this.setImageForReminder(a[i].fileType,a[i]);
             }
             // let el: HTMLElement = _this.myButton.nativeElement as HTMLElement;
             // el.click();
+            let upcoming  = a.filter(item => {
+              if(item.notificationSent == "no"){
+              let time = moment(item.schedule, ["h:mm A"]).format("HH:mm");
+              let hrs = time.split(":");
+              return parseInt(hrs[0])  < d.getHours() + 3
+             } });
+            console.log("upcoming",upcoming);
+
             _this.playAudioOrVideo(a[i]);
-            _this.updateNotification(id); // updating notification sent in firebase database
+            //_this.updateNotification(id); // updating notification sent in firebase database
           }
         }
         timerId = setTimeout(tick, 2000); // calling settimeout repeatedly to check if reminders need to be sent
