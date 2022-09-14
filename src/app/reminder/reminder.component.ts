@@ -15,7 +15,7 @@ import moment from 'moment/moment';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { VideoRecordingService } from '../video-recording.service';
-
+import { NgxSpinnerService } from "ngx-spinner";  
 
 @Component({
   selector: 'app-reminder',
@@ -93,7 +93,7 @@ export class ReminderComponent implements OnInit {
 
  constructor(private domSanitizer: DomSanitizer, private uploadService: MusicService,
    private fStorage: AngularFireStorage, private userDataService: UserdataService,
-   private fb: FormBuilder, private db: AngularFirestore,
+   private fb: FormBuilder, private db: AngularFirestore,private SpinnerService: NgxSpinnerService,
    private ref: ChangeDetectorRef, private videoRecordingService: VideoRecordingService) {
    this.userForm = this.fb.group(this.model, {});
 
@@ -272,6 +272,7 @@ export class ReminderComponent implements OnInit {
    if (this.selectedFiles) {
      let file: File = this.selectedFiles;
      this.fileName = "";
+     this.SpinnerService.show(); 
 
      if (this.fromRecordingToSaveInFirebase) {
        this.fileName = "audioRecording_" + Math.random();
@@ -311,13 +312,16 @@ export class ReminderComponent implements OnInit {
              file = undefined;
              this.percentageDisplay = ""
              this.disableUploadButton = true;
-             alert("Upload complete");
+             //alert("Upload complete");
              this.fileTypeChosen = "";
              this.action = "";
              this.url = undefined;
              this.fileNameForImage = ''
              this.fileName = ''
              this.userForm.reset();
+             setTimeout(() => {
+             this.SpinnerService.hide(); 
+            }, 200);
            }
          },
          error => {
@@ -425,6 +429,7 @@ export class ReminderComponent implements OnInit {
  downloadVideoRecordedData() {
    //const blob = new Blob([this.videoBlob], { type: 'video/mp4' });
     let fName = "videoRecording_" + Math.random();
+    this.SpinnerService.show(); 
     const file = new File(
       [this.videoBlob],
       fName,
@@ -448,6 +453,9 @@ export class ReminderComponent implements OnInit {
          this.userForm.reset();
          this.fileNameForImage = ''
              this.fileName = ''
+         setTimeout(() => {
+          this.SpinnerService.hide(); 
+         }, 200);
        },
        error => {
          console.log(error);

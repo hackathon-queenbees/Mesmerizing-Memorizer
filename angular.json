@@ -29,7 +29,8 @@
             ],
             "styles": [
               "src/styles.scss",
-              "src/assets/css/businesstheme.min.css"
+              "src/assets/css/businesstheme.css",
+              "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": []
           },
@@ -93,7 +94,7 @@
             ],
             "styles": [
               "src/styles.scss",
-              "src/assets/css/businesstheme.min.css"
+              "src/assets/css/businesstheme.css"
             ],
             "scripts": []
           }

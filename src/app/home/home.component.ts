@@ -19,6 +19,7 @@ export class HomeComponent implements OnInit {
     'breakfast': ['happy-cute-little-kid-girl-wake-up-169737451.jpg']
   };
   urlObtained;
+  isAudio;
   private audioObj: HTMLAudioElement;
   private videoObj: HTMLVideoElement;
   @ViewChild('audio') audio: ElementRef;
@@ -113,9 +114,11 @@ export class HomeComponent implements OnInit {
   playAudioOrVideo(userData) {
     if (userData.fileType == "Record Audio" || userData.fileType == "Upload Audio") {
       this.playAudioFile();
+      this.isAudio=true
     }
     else if (userData.fileType == "Record Video" || userData.fileType == "Upload Video") {
       this.playVideoFile();
+      this.isAudio=false
     }
 
   }

@@ -28,6 +28,8 @@
     "bootstrap": "^5.2.1",
     "firebase": "^8.0",
     "moment": "^2.29.4",
+    "ngx-spinner": "^11.0.2",
+    "ngx-toastr": "^13.2.1",
     "recordrtc": "^5.6.2",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",

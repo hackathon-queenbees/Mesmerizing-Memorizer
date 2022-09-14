@@ -1,7 +1,8 @@
 
 body {
   font-family: "Open Sans", sans-serif;
-  color: #777;
+  color: #333;
+  background: #f2f2f2 !important;
 }
 
 a {
@@ -145,11 +146,11 @@ section {
 # Header
 --------------------------------------------------------------*/
 #header {
-  height: 80px;
+  height: 64px;
   transition: all 0.5s;
   z-index: 997;
   transition: all 0.5s;
-  background: #2d6760;
+  background: #1B56A4;
 }
 
 #header.header-scrolled {
@@ -158,12 +159,12 @@ section {
 }
 
 #header .logo h1 {
-  font-size: 30px;
+  font-size: 24px;
   margin: 0;
   padding: 0;
   line-height: 0;
   font-weight: 700;
-  letter-spacing: 1px;
+  letter-spacing: 0;
 }
 
 #header .logo h1 a,
@@ -212,7 +213,7 @@ section {
   justify-content: space-between;
   padding: 10px 0 10px 30px;
   font-family: "Open Sans", sans-serif;
-  font-size: 14px;
+  font-size: 16px;
   color: #d2ece9;
   white-space: nowrap;
   transition: 0.3s;
@@ -1047,4 +1048,51 @@ section {
   text-align: center;
   font-size: 13px;
   color: #fff;
+}
+
+.btn-primary-custom{
+  background-color: #1B56A4;
+  border-color: #1B56A4;
+}
+.btn-primary-custom:hover,
+.btn-primary-custom:focus,
+.btn-primary-custom:active {
+  background-color: #103a72;
+  border-color: #103a72;
+}
+.btn-primary-custom.disabled, .btn-primary-custom:disabled, fieldset:disabled .btn-primary-custom {
+  color: #fff;
+  pointer-events: none;
+  background-color: #666666;
+  border-color: #666666;
+  opacity: 0.7;
+}
+
+.btn-secondary-custom{
+  background-color: #009FDB;
+  border-color: #009FDB;
+}
+.btn-secondary-custom:hover,
+.btn-secondary-custom:focus,
+.btn-secondary-custom:active {
+  background-color: #008cc1;
+  border-color: #008cc1;
+}
+
+.btn-light-custom{
+  background-color: #f8f9fa;
+  border-color: #f8f9fa;
+  color: #1B56A4;
+}
+.btn-light-custom:hover,
+.btn-light-custom:focus,
+.btn-light-custom:active {
+  background-color: #f8f9fa;
+  border-color: #f8f9fa;
+  color: #1B56A4;
+}
+
+/* Colors */
+.darkBlue{
+  color: #1b56a4;
 }

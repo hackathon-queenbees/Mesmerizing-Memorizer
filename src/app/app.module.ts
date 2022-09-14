@@ -14,6 +14,8 @@ import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home/home.component';
 import { NavbarcomponentComponent } from './navbarcomponent.component';
 import { ReminderComponent } from './reminder/reminder.component';
+import { NgxSpinnerModule } from "ngx-spinner";  
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { ReminderComponent } from './reminder/reminder.component';
     AngularFireModule.initializeApp(environment.FireBaseConfig),
     MaterialModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxSpinnerModule,
+    ToastrModule.forRoot()
   ],
   providers: [{provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}}],
   bootstrap: [AppComponent]
