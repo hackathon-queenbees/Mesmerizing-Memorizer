@@ -19,6 +19,7 @@ export class HomeComponent implements OnInit {
     'breakfast': ['happy-cute-little-kid-girl-wake-up-169737451.jpg']
   };
   urlObtained;
+  isAudio;
   private audioObj: HTMLAudioElement;
   private videoObj: HTMLVideoElement;
   @ViewChild('audio') audio: ElementRef;
@@ -75,7 +76,7 @@ export class HomeComponent implements OnInit {
             // let el: HTMLElement = _this.myButton.nativeElement as HTMLElement;
             // el.click();
             _this.playAudioOrVideo(a[i]);
-            _this.updateNotification(id); // updating notification sent in firebase database
+            //_this.updateNotification(id); // updating notification sent in firebase database
           }
         }
         timerId = setTimeout(tick, 2000); // calling settimeout repeatedly to check if reminders need to be sent
@@ -105,9 +106,11 @@ export class HomeComponent implements OnInit {
   playAudioOrVideo(userData) {
     if (userData.fileType == "Record Audio" || userData.fileType == "Upload Audio") {
       this.playAudioFile();
+      this.isAudio=true
     }
     else if (userData.fileType == "Record Video" || userData.fileType == "Upload Video") {
       this.playVideoFile();
+      this.isAudio=false
     }
 
   }

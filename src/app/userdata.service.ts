@@ -11,7 +11,7 @@ export class UserdataService {
 
   insertUserData(userDataObtained){
     this.db.collection('/userData').add(userDataObtained);
-    this.notifyService.showSuccess("Reminder added successfully", "ItSolutionStuff.com")
+    this.notifyService.showSuccess("Reminder added successfully", "M & M")
     //alert("Reminder added successfully");
   }
 
