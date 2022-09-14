@@ -5,14 +5,19 @@
         <div class="container">
             <div class="row d-flex align-items-center">
                 <div class="col-md-6 col-sm-6">
-                    <h1>Heading</h1>
-                    <p>testing testing</p>
+                    <h1>Your personalized Memory Mate</h1>
+                    <p>True to the adage "A picture speaks more than a thousand words" , 
+                        our application M&M aims at providing visual reminders to its users. 
+                        Plan your day and the leave the reminder part to M&M. 
+                        Now you can record audio or video snippets that would be played at the scheduled time.
+                        Overall, M&M comes up with a way to reminisce our memories and never miss a commitment in the day.</p>
                 </div>
                 <div class="col-md-6 col-sm-6">
                     <div class="media_container">
                         <!-- Empty Image -->
-                        <!-- <img class="img-fluid"/> -->
+                        <img class="img-fluid" style="height:300px" src="../../assets/img/schedule.png" [hidden]="isAudio || isVideo"/>
                         <!-- Empty Image -->
+                        <h1 [hidden]="!isAudio && !isVideo">Its time for {{categoryDisplay}} !!!</h1>
                         <div style="width: 100%;" [hidden]="!isAudio"> 
                             <img class="audio_preview img-fluid" src="{{imageUrl}}"/>
                             <audio controls #audioPlay id='player' style="width: 100%;">
@@ -20,7 +25,7 @@
                             </audio>
                         </div>
                         <!-- Video content -->
-                        <div style="width: 100%;"[hidden]="isAudio">
+                        <div style="width: 100%;"[hidden]="!isVideo">
                             <video #videoEl width="100%" height="480" controls>
                             <source type='video/mp4' src="{{urlObtained}}">
                             </video>

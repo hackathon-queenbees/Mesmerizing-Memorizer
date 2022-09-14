@@ -15,17 +15,29 @@ import * as  moment from 'moment';
 export class HomeComponent implements OnInit {
   imageUrl;
   imageFiles = {
-    'wakeup': ['happy-cute-little-kid-girl-wake-up-169737451.jpg'],
-    'breakfast': ['happy-cute-little-kid-girl-wake-up-169737451.jpg']
+    'Wakeup': ['happy-cute-little-kid-girl-wake-up-169737451.jpg'],
+    'Breakfast': ['Kid having Breakfast.jpg'],
+    'MorningRoutine Chart':['End to end Morning Routine.jpg'],
+    'Shower':['Kid Enjoying Bathing.png'],
+    'Get Dressed':['Kids_Getting_Dressed.png'],
+    'School':['Kids at school.jpg'],
+    'Lunch':['Lunch And Dinner.jpg'],
+    'Dinner':['Lunch And Dinner.jpg'],
+    'Playtime':['Fun and Play.jpg'],
+    'Medicine':['Kids_Taking_Medicine.png'],
+    'Nap Time':['Kids_Nap_Time.jpg'],
+    'Fitness':['Exercise and Fitness.jpg']
   };
   urlObtained;
-  isAudio;
+  isAudio = false;
+  isVideo = false;
   private audioObj: HTMLAudioElement;
   private videoObj: HTMLVideoElement;
   @ViewChild('audio') audio: ElementRef;
   @ViewChild('audioPlay') audioPlay: ElementRef;
   @ViewChild('videoEl') videoEl: ElementRef;
-  upcomingList=[]
+  upcomingList=[];
+  categoryDisplay;
   constructor(private domSanitizer: DomSanitizer, private db: AngularFirestore,
     private ref: ChangeDetectorRef, private uploadService: MusicService) { }
 
@@ -68,24 +80,28 @@ export class HomeComponent implements OnInit {
           var time = moment(a[i].schedule, ["h:mm A"]).format("HH:mm");
           this.hrsAndMin = time.split(":");
           var eta_ms = new Date(d.getFullYear(), d.getMonth(), d.getDate(), this.hrsAndMin[0], this.hrsAndMin[1]).getTime() - Date.now();
+          let upcoming  = a.filter(item => {
+            if(item.notificationSent == "no"){
+            let time = moment(item.schedule, ["h:mm A"]).format("HH:mm");
+            let hrs = time.split(":");
+            return parseInt(hrs[0])  < d.getHours() + 3
+           } });
+           _this.upcomingList = upcoming;
+           _this.upcomingList = _this.upcomingList.filter(item => item.notificationSent == "no");
+           console.log("upcoming",_this.upcomingList);
+
           if (eta_ms <= 0 && a[i].notificationSent == "no") {
             let id = a[i].id;
             //console.log("available reminders::" + JSON.stringify(a[i]));
             _this.urlObtained = a[i].downloadURL;
             if (a[i].fileType == "Record Audio" || a[i].fileType == "Upload Audio") {
-              _this.setImageForReminder(a[i].fileType,a[i]);
+              _this.setImageForReminder(a[i].category,a[i]);
             }
             // let el: HTMLElement = _this.myButton.nativeElement as HTMLElement;
             // el.click();
-            let upcoming  = a.filter(item => {
-              if(item.notificationSent == "no"){
-              let time = moment(item.schedule, ["h:mm A"]).format("HH:mm");
-              let hrs = time.split(":");
-              return parseInt(hrs[0])  < d.getHours() + 3
-             } });
-             _this.upcomingList.push(upcoming[0]);
-            console.log("upcoming",this.upcomingList);
+            
 
+            _this.categoryDisplay = a[i].category;
             _this.playAudioOrVideo(a[i]);
             //_this.updateNotification(id); // updating notification sent in firebase database
           }
@@ -117,11 +133,13 @@ export class HomeComponent implements OnInit {
   playAudioOrVideo(userData) {
     if (userData.fileType == "Record Audio" || userData.fileType == "Upload Audio") {
       this.playAudioFile();
-      this.isAudio=true
+      this.isAudio=true;
+      this.isVideo =  false;
     }
     else if (userData.fileType == "Record Video" || userData.fileType == "Upload Video") {
       this.playVideoFile();
-      this.isAudio=false
+      this.isVideo = true;
+      this.isAudio  = false;
     }
 
   }
@@ -161,7 +179,6 @@ export class HomeComponent implements OnInit {
         this.videoObj.play();
       });
     }
-
   }
 
 }

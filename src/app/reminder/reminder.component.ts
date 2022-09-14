@@ -49,7 +49,7 @@ export class ReminderComponent implements OnInit {
  private audioObj: HTMLAudioElement;
   private videoObj :HTMLVideoElement;
  userForm: FormGroup;
- categoryList = ["Wakeup", "Breakfast", "Playtime", "Lunch", "Custom"];
+ categoryList =  ["MorningRoutine Chart","Wakeup", "Shower", "Get Dressed","Breakfast","School","Lunch","Snack Time","Playtime","Fitness","Dinner","Nap Time","Custom"];
  fileTypeList = ["Record Audio","Record Video", "Upload Audio", "Upload Video"]
  categoryChosen;
  fileTypeChosen;
@@ -62,10 +62,6 @@ export class ReminderComponent implements OnInit {
  public dataSource = new MatTableDataSource<UserData>();
  @ViewChild(MatSort) sort: MatSort;
  imageUrl;
- imageFiles = {
-   'wakeup': ['happy-cute-little-kid-girl-wake-up-169737451.jpg'],
-   'breakfast': ['happy-cute-little-kid-girl-wake-up-169737451.jpg']
- };
 
  // Form
  model = {
