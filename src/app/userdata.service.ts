@@ -1,16 +1,18 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { NotificationService } from './notification.service'
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserdataService {
 
-  constructor(private db: AngularFirestore) { }
+  constructor(private db: AngularFirestore,private notifyService : NotificationService) { }
 
   insertUserData(userDataObtained){
     this.db.collection('/userData').add(userDataObtained);
-    alert("Reminder added successfully");
+    this.notifyService.showSuccess("Reminder added successfully", "ItSolutionStuff.com")
+    //alert("Reminder added successfully");
   }
 
   updateNotificationSent(id){
