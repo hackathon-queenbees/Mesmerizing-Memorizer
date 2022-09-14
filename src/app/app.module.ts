@@ -16,6 +16,7 @@ import { NavbarcomponentComponent } from './navbarcomponent.component';
 import { ReminderComponent } from './reminder/reminder.component';
 import { NgxSpinnerModule } from "ngx-spinner";  
 import { ToastrModule } from 'ngx-toastr';
+import { AboutComponent } from './about/about.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { ToastrModule } from 'ngx-toastr';
     TestComponent,
     HomeComponent,
     NavbarcomponentComponent,
-    ReminderComponent
+    ReminderComponent,
+    AboutComponent
   ],
   imports: [
     CommonModule,
