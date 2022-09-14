@@ -1,1 +1,54 @@
-<p>home works!</p>
+<div style="margin-top: 160px;"></div>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <img style="width:110px;height:110px" src="{{imageUrl}}"/>
+        </div>
+        <div class="col">
+            <h1>DESCRIPTION</h1>
+        </div>
+
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="text-center">
+                        <h3>
+                            <!-- <video #videoEl controls autoplay muted>
+                            <source src="{{urlObtained}}">
+                        </video> -->
+                            <!-- <img style="width:110px;height:110px" src="{{imageUrl}}" /> -->
+                            <audio controls #audioPlay id='player'>
+                                <source type="audio/mpeg">
+                            </audio>
+                        </h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="text-center">
+                        <h3>
+                            <!-- <video #videoEl controls autoplay muted>
+                                <source src="{{urlObtained}}">
+                            </video> -->
+                            <video #videoEl width="320" height="240" controls>
+
+                                <source type='video/mp4' src="{{urlObtained}}">
+
+                            </video>
+                        </h3>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
