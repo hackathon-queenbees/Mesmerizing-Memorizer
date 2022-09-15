@@ -434,9 +434,21 @@ export class ReminderComponent implements OnInit {
      this.fileName = "videoRecording_" + Math.random();
      let userDataObtained = {
        category: this.categoryChosen,
+       customCategory :"no",
        fileType: this.fileTypeChosen,
        schedule: this.userForm.value.timeChosen,
-       notificationSent: "no"
+       notificationSent: "no",
+       imgFile : null
+     }
+     if(this.categoryChosen == 'Custom'){
+      userDataObtained = {
+        category: this.userForm.value.customCategory,
+        customCategory : "yes",
+        fileType: this.fileTypeChosen,
+        schedule: this.userForm.value.timeChosen,
+        notificationSent: "no",
+        imgFile : null
+      }
      }
    if (file) {
      this.currentFileUpload = new FileUpload(file);

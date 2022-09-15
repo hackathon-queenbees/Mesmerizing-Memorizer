@@ -57,7 +57,7 @@ export class MusicService {
         storageRef.getDownloadURL().subscribe(downloadURL => {
           console.log(downloadURL);
 
-          if(userDataObtained.customCategory == "yes"){
+          if(userDataObtained.customCategory == "yes" && (userDataObtained.fileType == "Record Audio"||userDataObtained.fileType == "Upload Audio")){
             let imageFileForUpload = new FileUpload(userDataObtained.imgFile);
             const storageRefForImage = this.storage.ref(`customImages/${userDataObtained.imgFile.name}`);
           uploadImageForCustomReminder = this.storage.upload(`customImages/${imageFileForUpload.file.name}`, imageFileForUpload.file);
