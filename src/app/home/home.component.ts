@@ -7,6 +7,7 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { MusicService } from '../music.service';
 import * as  moment from 'moment';
+import { NgxSpinnerService } from "ngx-spinner";  
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -39,7 +40,8 @@ export class HomeComponent implements OnInit {
   upcomingList=[];
   categoryDisplay;
   constructor(private domSanitizer: DomSanitizer, private db: AngularFirestore,
-    private ref: ChangeDetectorRef, private uploadService: MusicService) { }
+    private ref: ChangeDetectorRef, private uploadService: MusicService,
+    private SpinnerService: NgxSpinnerService) { }
 
   ngOnInit(): void {
     this.getAllUserData();
@@ -132,11 +134,13 @@ export class HomeComponent implements OnInit {
 
   playAudioOrVideo(userData) {
     if (userData.fileType == "Record Audio" || userData.fileType == "Upload Audio") {
+      this.SpinnerService.show(); 
       this.playAudioFile();
       this.isAudio=true;
       this.isVideo =  false;
     }
     else if (userData.fileType == "Record Video" || userData.fileType == "Upload Video") {
+      this.SpinnerService.show(); 
       this.playVideoFile();
       this.isVideo = true;
       this.isAudio  = false;
@@ -147,6 +151,9 @@ export class HomeComponent implements OnInit {
   playAudioFile() {
     this.audioObj = this.audioPlay.nativeElement;
     this.audioObj.src = this.urlObtained;
+    setTimeout(() => {
+      this.SpinnerService.hide(); 
+     }, 200);
     var prom = this.audioObj.play();
     //this.filePlaying = "audio";
     if (prom) {
@@ -166,6 +173,9 @@ export class HomeComponent implements OnInit {
   playVideoFile() {
     this.videoObj = this.videoEl.nativeElement;
     this.videoObj.src = this.urlObtained;
+    setTimeout(() => {
+      this.SpinnerService.hide(); 
+     }, 200);
     var prom = this.videoObj.play();
     //this.filePlaying = "video";
     if (prom) {
