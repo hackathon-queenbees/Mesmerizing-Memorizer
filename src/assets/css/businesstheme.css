@@ -1052,6 +1052,7 @@ section {
 }
 
 .btn-primary-custom{
+  color: #fff;
   background-color: #1B56A4;
   border-color: #1B56A4;
 }

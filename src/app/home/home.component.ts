@@ -105,10 +105,10 @@ export class HomeComponent implements OnInit {
 
             _this.categoryDisplay = a[i].category;
             _this.playAudioOrVideo(a[i]);
-            //_this.updateNotification(id); // updating notification sent in firebase database
+            _this.updateNotification(id); // updating notification sent in firebase database
           }
         }
-        //timerId = setTimeout(tick, 2000); // calling settimeout repeatedly to check if reminders need to be sent
+        timerId = setTimeout(tick, 2000); // calling settimeout repeatedly to check if reminders need to be sent
       }, 2000);
 
     })

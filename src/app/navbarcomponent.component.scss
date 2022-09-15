@@ -1,0 +1,98 @@
+.app-container { 
+    flex: 1; 
+    display: flex; 
+    z-index: 8; 
+    position: relative; 
+  } 
+
+  .app-content-bar{
+    z-index: 9;
+    padding-left: 280px;
+    flex: 1;
+    flex-direction: column;
+    display: flex;
+  }
+
+  .app-content-bar-inner {
+    padding: 90px 30px 30px 30px;
+    flex: 1;
+  }
+
+  #mainNav {
+    padding-top   : 0.5rem !important;
+    padding-bottom: 0.5rem !important;
+}
+
+#header .navbar .container .logo h1 {
+  font-size: 24px;
+  margin: 0;
+  padding: 0;
+  line-height: 0;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+#header .navbar .container .logo  .logo h1 a,
+#header .navbar .container .logo .logo h1 a:hover {
+  color: #fff;
+  text-decoration: none;
+  line-height: 0;
+}
+
+#header .logo img {
+  padding: 0;
+  margin: 0;
+  max-height: 40px;
+}
+
+#main {
+  margin-top: 80px;
+}
+
+
+.navbar {
+  padding: 0;
+}
+
+.navbar ul {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  list-style: none;
+  align-items: center;
+}
+
+.navbar li {
+  position: relative;
+}
+
+.navbar a,
+.navbar a:focus {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0 10px 30px;
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+  color: #d2ece9;
+  white-space: nowrap;
+  transition: 0.3s;
+}
+
+.navbar a i,
+.navbar a:focus i {
+  font-size: 12px;
+  line-height: 0;
+  margin-left: 5px;
+}
+
+.navbar a:hover,
+.navbar .active,
+.navbar .active:focus,
+.navbar li:hover>a {
+  color: #fff;
+}
+
+.custom-color{
+background: #1B56A4 !important;
+}
